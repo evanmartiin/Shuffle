@@ -53,13 +53,13 @@ module.exports = {
             },
             {
                 // Load all icons
-                test: /\.(eot|woff|woff2|svg|ttf|jpg|png|jpeg|glb|gltf)([\?]?.*)$/,
+                test: /\.(eot|woff|woff2|svg|ttf|jpg|png|jpeg|glb|gltf|mp3)([\?]?.*)$/,
                 use: [
                     {
                         loader: 'file-loader',
                     }
                 ]
-            },
+            }
         ],
     },
     plugins: [

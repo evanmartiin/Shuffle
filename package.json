@@ -7,12 +7,15 @@
         "start": "webpack-dev-server --config webpack.dev.js --mode development",
         "build": "webpack --config webpack.prod.js --mode production"
     },
-    "author": "Dorian",
+    "author": "Evan",
     "license": "ISC",
     "dependencies": {
         "3d-force-graph": "^1.70.5",
+        "chart.js": "^3.6.0",
         "event-emitter": "^0.3.5",
         "gl-matrix": "^3.3.0",
+        "gsap": "^3.8.0",
+        "howler": "^2.2.3",
         "normalize.css": "^8.0.0",
         "three": "^0.134.0"
     },

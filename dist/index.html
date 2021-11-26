@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" id="favicon" />
+    <title>Shuffle @ Gobelins</title>
+<link href="styles.6ed89aea41880466b841.css" rel="stylesheet"></head>
+<body>
+  <button id="bilanBtn" style="position: absolute; top: 0; left: 0; z-index: 10;">Bilan</button>
+  <div id="3d-graph"></div>
+  <button id="speakerBtn"><img id="speaker" alt="On/Off sound"></button>
+  <div class="rectleftparent"><div class="rect-left"></div></div>
+  <div class="rectrightparent"><div class="rect-right"></div></div>
+  <div class="home">
+    <img id="logo-home" alt="Shuffle logo">
+    <p>Cette datavisualisation sert à montrer les relations sociales au sein de la promo BDDI 2021-2022 avant et après l’arrivée des nouveaux développeurs.</p>
+    <p>Quels vont être les impacts de ces nouvelles relations ?</p>
+    <button id="start">
+      <svg width="29" height="31" viewBox="0 0 29 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M25.5094 11.1699C28.8428 13.0944 28.8428 17.9056 25.5094 19.8301L8.24529 29.7976C4.91196 31.7221 0.745287 29.3165 0.745287 25.4675L0.745288 5.53253C0.745289 1.68353 4.91195 -0.722087 8.24529 1.20241L25.5094 11.1699Z" fill="white"/>
+      </svg>
+    </button>
+  </div>
+  <div class="content">
+    <img id="logo-content" alt="Shuffle logo">
+    <h1 id="h1-content">Année <span>2020</span></h1>
+    <p class="subtitles"></p>
+    <div class="timeline-container">
+      <div class="timeline">
+        <div class="tl-up">
+          <p class="tl-text triggered tx-1">2020</p>
+          <p class="tl-text default tx-2">2021</p>
+          <p class="tl-text default tx-3">Bilan</p>
+        </div>
+        <div class="tl-down">
+          <div class="tl-line"></div>
+          <div class="tl-points">
+            <div class="tl tl-big triggered tl-1"><div></div></div>
+            <div class="tl tl-small default tl-2"></div>
+            <div class="tl tl-small default tl-3"></div>
+            <div class="tl tl-small default tl-4"></div>
+            <div class="tl tl-small default tl-5"></div>
+            <div class="tl tl-small default tl-6"></div>
+            <div class="tl tl-big default tl-7"><div></div></div>
+            <div class="tl tl-small default tl-8"></div>
+            <div class="tl tl-small default tl-9"></div>
+            <div class="tl tl-small default tl-10"></div>
+            <div class="tl tl-small default tl-11"></div>
+            <div class="tl tl-small default tl-12"></div>
+            <div class="tl tl-big default tl-13"><div></div></div>
+            <div class="tl tl-small default tl-14"></div>
+            <div class="tl tl-small default tl-15"></div>
+            <div class="tl tl-small default tl-16"></div>
+            <div class="tl tl-small default tl-17"></div>
+            <div class="tl tl-small default tl-18"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="caption"></div>
+    <button id="nextBtn"><img id="next" alt="Étape suivante"></button>
+    <div class="card">
+      <button id="cardClose">X</button>
+    </div>
+  </div>
+  <div class="bilan">
+    <div class="frame-1">
+      <h2><span id="counter1">45</span> BDDI</h2>
+      <div class="container">
+        <div class="element">
+          <p>2020</p>
+          <div class="round round2020">30
+            <div>
+              <img class="people" alt="People">
+              <img class="people" alt="People">
+            </div>
+          </div>
+        </div>
+        <div class="element">
+          <p>2021</p>
+          <div class="round round2021">+15
+            <img class="people" alt="People"></div>
+        </div>
+      </div>
+    </div>
+    <div class="frame-2">
+      <div class="round">
+        <span id="counter2">45</span>
+        <div>
+          <div>
+            <img class="people" alt="People">
+            <img class="people" alt="People">
+          </div>
+          <div>
+            <img class="people" alt="People">
+            <img class="people" alt="People">
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2><span>-9%</span> de femmes</h2>
+        <h2><span>+11%</span> d'hommes</h2>
+        <h2><span>-4%</span> de non-genrés</h2>
+      </div>
+    </div>
+    <div class="frame-3">
+      <div>
+        <h3><span>+1%</span> qu'en 2020</h3>
+        <div class="circle">
+          <svg
+            class="progress-ring"
+            width="212"
+            height="212">
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#6648FF" />
+                <stop offset="100%" stop-color="#00AEF3" />
+              </linearGradient>
+            </defs>
+            <circle
+              id="circle1"
+              class="progress-ring__circle"
+              stroke="url(#gradient)"
+              stroke-width="10"
+              fill="transparent"
+              r="100"
+              cx="106"
+              cy="106"/>
+          </svg>
+          <div></div>
+          <h3>En couple</h3>
+          <h2><span>38%</span></h2>
+        </div>
+      </div>
+      <div>
+        <h3><span>+1%</span> qu'en 2020</h3>
+        <div class="circle">
+          <svg
+            class="progress-ring"
+            width="212"
+            height="212">
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#6648FF" />
+                <stop offset="100%" stop-color="#00AEF3" />
+              </linearGradient>
+            </defs>
+            <circle
+              id="circle2"
+              class="progress-ring__circle"
+              stroke="url(#gradient)"
+              stroke-width="10"
+              fill="transparent"
+              r="100"
+              cx="106"
+              cy="106"/>
+          </svg>
+          <div></div>
+          <h3>Célibataire</h3>
+          <h2><span>58%</span></h2>
+        </div>
+      </div>
+      <div>
+        <h3><span>-3%</span> qu'en 2020</h3>
+        <div class="circle">
+          <svg
+            class="progress-ring"
+            width="212"
+            height="212">
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#6648FF" />
+                <stop offset="100%" stop-color="#00AEF3" />
+              </linearGradient>
+            </defs>
+            <circle
+              id="circle3"
+              class="progress-ring__circle"
+              stroke="url(#gradient)"
+              stroke-width="10"
+              fill="transparent"
+              r="100"
+              cx="106"
+              cy="106"/>
+          </svg>
+          <div></div>
+          <h3>Compliqué</h3>
+          <h2><span>4%</span></h2>
+        </div>
+      </div>
+    </div>
+    <div class="frame-4">
+      <canvas id="myChart"></canvas>
+      <div id="frame4params">
+        <div>
+          <div class="color" style="background-color: #3C23BC;"></div>
+          <h2><span>+16%</span> de province</h2>
+        </div>
+        <div>
+          <div class="color" style="background-color: #0B4FD2;"></div>
+          <h2><span>-6%</span> de banlieue</h2>
+        </div>
+        <div>
+          <div class="color" style="background-color: #1463FF;"></div>
+          <h2><span>-3%</span> d'autres pays</h2>
+        </div>
+        <div>
+          <div class="color" style="background-color: #2D99FF;"></div>
+          <h2><span>-9%</span> de Paris</h2>
+        </div>
+      </div>
+    </div>
+    <div class="frame-5">
+      <div class="graph">
+        <div class="side">
+          <div class="top">
+            <div class="column">
+              <h2><span class="bar-stat">43%</span></h2>
+              <div class="bar bar-1"></div>
+            </div>
+            <div class="column">
+              <h2><span class="bar-stat">57%</span></h2>
+              <div class="bar bar-2"></div>
+            </div>
+          </div>
+          <h3>Paris intra-muros</h3>
+        </div>
+        <div class="side">
+          <div class="top">
+            <div class="column">
+              <h2><span class="bar-stat">41%</span></h2>
+              <div class="bar bar-1"></div>
+            </div>
+            <div class="column">
+              <h2><span class="bar-stat">59%</span></h2>
+              <div class="bar bar-2"></div>
+            </div>
+          </div>
+          <h3>Banlieue</h3>
+        </div>
+      </div>
+      <div class="legend">
+        <div>
+          <div class="color" style="background-color: #1463FF;"></div>
+          <h2>Développeur</h2>
+        </div>
+        <div>
+          <div class="color" style="background-color: #F5B350;"></div>
+          <h2>Designer</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript" src="main.1bcd63ee77f665a2e6f4.js"></script></body>
+</html>
