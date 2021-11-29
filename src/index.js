@@ -19,6 +19,7 @@ const speakeroff = require("./assets/speaker-off.png")
 document.getElementById("speaker").src = speakeroff;
 const next = require("./assets/next.png")
 document.getElementById("next").src = next;
+document.getElementById("prev").src = next;
 const favicon = require("./assets/favicon.png");
 document.getElementById("favicon").href = favicon;
 const people = require("./assets/people.png");
@@ -181,20 +182,45 @@ const timeline = (number) => {
 
 document.getElementById("nextBtn").addEventListener("click", _ => {
     STEP++;
-    progress();
+    progress("forward");
 })
 
-const progress = () => {
+document.getElementById("prevBtn").addEventListener("click", _ => {
+    STEP--;
+    progress("backward");
+})
+
+const progress = (direction) => {
     const { nodes, links } = Graph.graphData();
     let newNodes = []
     let newLinks = []
     STEP < 8 ? sub(STEP + 1) : STEP === 8 ? null : sub(STEP)
     STEP < 14 ? caption(captionsOrder[STEP]) : caption("none")
-    if (STEP < 4 || STEP > 16) {
+    
+    if (direction === "forward" && (STEP > 3 && STEP < 6 || STEP > 7 && STEP < 17)) {
+        DOT++;
+    }
+    if (direction === "backward" && (STEP > 2 && STEP < 5 || STEP > 6 && STEP < 16)) {
         DOT--;
     }
+
+    if (STEP === 0) {
+        document.getElementById("prevBtn").style.pointerEvents = "none";
+        document.getElementById("prevBtn").style.opacity = 0;
+    } else {
+        document.getElementById("prevBtn").style.pointerEvents = "all";
+        document.getElementById("prevBtn").style.opacity = 1;
+    }
+
+    if (STEP === 19) {
+        document.getElementById("nextBtn").style.pointerEvents = "none";
+        document.getElementById("nextBtn").style.opacity = 0;
+    } else {
+        document.getElementById("nextBtn").style.pointerEvents = "all";
+        document.getElementById("nextBtn").style.opacity = 1;
+    }
+
     if (STEP < 6) {
-        DOT++;
         timeline(STEP);
         nodes.forEach(node => { delete node.color; });
         for (let i = 0; i < data.nodes.length; i++) {
@@ -203,7 +229,8 @@ const progress = () => {
         for (let i = 0; i < data.links.length; i++) {
             newLinks.push(data.links[i])
         }
-        if (STEP === 0) Graph.graphData({ nodes: [...newNodes], links: [...newLinks] }).nodeColor(node => captions.group2020[node.group2020 - 1][1]);
+        
+        if (STEP === 0) Graph.graphData({ nodes: [...newNodes], links: [...newLinks] }).nodeColor(node => captions.group2020[node.group2020 - 1]);
         else if (STEP === 1) Graph.graphData({ nodes: [...newNodes], links: [...newLinks] }).nodeColor(node => captions.gender[node.gender - 1][1]);
         else if (STEP === 2) Graph.graphData({ nodes: [...newNodes], links: [...newLinks] }).nodeColor(node => captions.spe[node.spe - 1][1]);
         else if (STEP === 3) Graph.graphData({ nodes: [...newNodes], links: [...newLinks] }).nodeColor(node => captions.situation[node.situation - 1][1]);
@@ -224,6 +251,7 @@ const progress = () => {
         setTimeout(() => {
             if (STEP === 7) {
                 STEP++;
+                DOT++
                 progress()
             }
         }, 4000);
@@ -241,10 +269,8 @@ const progress = () => {
             Graph.graphData({ nodes: [...nodes], links: [...links] }).nodeColor(node => captions.group2021[node.group2021 - 1]);
         }
         title.innerHTML = "Année <span>2021</span>"
-        DOT++;
         timeline(6)
     } else if (STEP >= 9 && STEP < 14) {
-        DOT++;
         timeline(STEP-2)
         nodes.forEach(node => { delete node.color; });
         if (STEP === 9) Graph.graphData({ nodes: [...nodes], links: [...links] }).nodeColor(node => captions.gender[node.gender - 1][1]);
@@ -253,10 +279,12 @@ const progress = () => {
         else if (STEP === 12) Graph.graphData({ nodes: [...nodes], links: [...links] }).nodeColor(node => captions.origin[node.origin - 1][1]);
         else if (STEP === 13) Graph.graphData({ nodes: [...nodes], links: [...links] }).nodeColor(node => captions.location[node.location - 1][1]);
     } else if (STEP === 14) {
+        Graph.cameraPosition({ x: 0, y: 0, z: 500 }, { x: 0, y: 0, z: 0 }, 2000)
+        frames.forEach(frame => { frame.style.opacity = 0 })
+        Graph.enableNavigationControls(false)
         nodes.forEach(node => { delete node.color; });
         Graph.graphData({ nodes: [...nodes], links: [...links] }).nodeAutoColorBy("group2021");
         title.innerHTML = "Bilan"
-        DOT++;
         timeline(12)
     } else if (STEP === 15) {
         Graph.cameraPosition({ x: 0, y: 0, z: 500 }, { x: 1000, y: 0, z: 0 }, 2000)
@@ -267,7 +295,6 @@ const progress = () => {
         gsap.from(counter, { innerHTML: Math.floor(0), duration: 2, onUpdate: _ => {
             counter.innerHTML = Math.floor(parseInt(counter.innerHTML))
         }})
-        DOT++;
         timeline(13)
     } else if (STEP === 16) {
         frames.forEach(frame => { frame.style.opacity = 0 })
@@ -277,7 +304,6 @@ const progress = () => {
         gsap.from(counter, { innerHTML: Math.floor(0), duration: 2, onUpdate: _ => {
             counter.innerHTML = Math.floor(parseInt(counter.innerHTML))
         }})
-        DOT++;
         timeline(14)
     } else if (STEP === 17) {
         frames.forEach(frame => { frame.style.opacity = 0 })
@@ -286,7 +312,6 @@ const progress = () => {
         setProgress(document.querySelector('#circle1'), 38);
         setProgress(document.querySelector('#circle2'), 58);
         setProgress(document.querySelector('#circle3'), 4);
-        DOT++;
         timeline(15)
     } else if (STEP === 18) {
         frames.forEach(frame => { frame.style.opacity = 0 })
@@ -294,13 +319,10 @@ const progress = () => {
         let frame4anim = document.getElementById("frame4params").children
         gsap.from(frame4anim, { translateY: -50, opacity: 0, duration: 1.5, stagger: { from: 'end', each: .1 }, ease: 'Power2.InOut' })
         Graph.enableNavigationControls(false)
-        DOT++;
         timeline(16)
     } else if (STEP === 19) {
         frames.forEach(frame => { frame.style.opacity = 0 })
         frames[4].style.opacity = 1
-        document.getElementById("nextBtn").style.pointerEvents = "none";
-        document.getElementById("nextBtn").style.opacity = 0;
         Graph.enableNavigationControls(false)
         let bars = Array.from(document.getElementsByClassName("bar"))
         let barsOffset = [{h: 172}, {h: 228}, {h: 164}, {h: 236}]
@@ -315,7 +337,6 @@ const progress = () => {
                 counters[i].innerHTML = Math.floor(parseInt(counters[i].innerHTML)) + "%"
             }})
         }
-        DOT++;
         timeline(17)
     }
 }

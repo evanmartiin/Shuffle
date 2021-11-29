@@ -378,6 +378,28 @@ h1 {
   }
 }
 
+#prevBtn {
+  width: 70px;
+  height: 70px;
+  background-color: $blue;
+  border-radius: 50%;
+  border: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  opacity: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  img {
+    width: 25px;
+    transform: rotateZ(180deg);
+  }
+}
+
 #nextBtn {
   width: 70px;
   height: 70px;
