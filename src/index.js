@@ -22,10 +22,15 @@ document.getElementById("next").src = next;
 document.getElementById("prev").src = next;
 const favicon = require("./assets/favicon.png");
 document.getElementById("favicon").href = favicon;
+const cardCloseImg = require("./assets/close.png");
+document.getElementById("cardCloseImg").src = cardCloseImg;
 const people = require("./assets/people.png");
 Array.from(document.getElementsByClassName("people")).forEach(element => {
     element.src = people
 });
+
+let prevBtn = document.getElementById("prevBtn");
+let nextBtn = document.getElementById("nextBtn");
 
 const canvas = document.getElementById("3d-graph");
 const distance = 80;
@@ -71,6 +76,7 @@ let Graph = ForceGraph3D()(canvas)
 .showNavInfo(false);
 
 Graph.controls().noZoom = true
+Graph.controls().noPan = true
 
 document.getElementById("start").addEventListener("click", _ => { start() });
 
@@ -115,8 +121,8 @@ const start = () => {
     gsap.to(opLink, { value: .2, duration: 5, onUpdate: _ => {
         Graph.linkOpacity(opLink.value)
     }, onComplete: _ => {
-        document.getElementById("nextBtn").style.pointerEvents = "all";
-        document.getElementById("nextBtn").style.opacity = 1;
+        nextBtn.style.pointerEvents = "all";
+        nextBtn.style.opacity = 1;
         // let angle = 0;
         // setInterval(() => {
         //   Graph.cameraPosition({
@@ -144,13 +150,6 @@ const start = () => {
 }
 
 const title = document.getElementsByTagName("h1")[0]
-
-// document.getElementsByClassName("tl-1")[0].addEventListener("click", _ => {
-//     timeline(0)
-//     title.innerHTML = "Année <span>2020</span>"
-//     STEP = 0
-//     progress()
-// })
 
 const timeline = (number) => {
     let points = Array.from(document.getElementsByClassName("tl"))
@@ -180,12 +179,12 @@ const timeline = (number) => {
     }
 }
 
-document.getElementById("nextBtn").addEventListener("click", _ => {
+nextBtn.addEventListener("click", _ => {
     STEP++;
     progress("forward");
 })
 
-document.getElementById("prevBtn").addEventListener("click", _ => {
+prevBtn.addEventListener("click", _ => {
     STEP--;
     progress("backward");
 })
@@ -205,19 +204,19 @@ const progress = (direction) => {
     }
 
     if (STEP === 0) {
-        document.getElementById("prevBtn").style.pointerEvents = "none";
-        document.getElementById("prevBtn").style.opacity = 0;
+        prevBtn.style.pointerEvents = "none";
+        prevBtn.style.opacity = 0;
     } else {
-        document.getElementById("prevBtn").style.pointerEvents = "all";
-        document.getElementById("prevBtn").style.opacity = 1;
+        prevBtn.style.pointerEvents = "all";
+        prevBtn.style.opacity = 1;
     }
 
     if (STEP === 19) {
-        document.getElementById("nextBtn").style.pointerEvents = "none";
-        document.getElementById("nextBtn").style.opacity = 0;
+        nextBtn.style.pointerEvents = "none";
+        nextBtn.style.opacity = 0;
     } else {
-        document.getElementById("nextBtn").style.pointerEvents = "all";
-        document.getElementById("nextBtn").style.opacity = 1;
+        nextBtn.style.pointerEvents = "all";
+        nextBtn.style.opacity = 1;
     }
 
     if (STEP < 6) {
@@ -383,9 +382,9 @@ const captions = {
 }
 
 const captionsOrder = ["none", captions.gender, captions.spe, captions.situation, captions.origin, captions.location, "none", "none", "none", captions.gender, captions.spe, captions.situation, captions.origin, captions.location]
+let captionDOM = document.getElementsByClassName("caption")[0]
 
 const caption = (theme) => {
-    let captionDOM = document.getElementsByClassName("caption")[0]
     if (theme === "none") {
         captionDOM.style.opacity = 0;
     } else {
@@ -420,12 +419,24 @@ const card = (node) => {
     let cardDOM = document.getElementsByClassName("card")[0]
     if (node === "none") {
         cardDOM.style.opacity = 0;
+        cardDOM.style.pointerEvents = "none";
+        prevBtn.style.opacity = 1;
+        prevBtn.style.pointerEvents = "all";
+        nextBtn.style.opacity = 1;
+        nextBtn.style.pointerEvents = "all";
+        captionsOrder[STEP] === "none" ? captionDOM.style.opacity = 0 : captionDOM.style.opacity = 1;
         Graph.cameraPosition({ x: 0, y: 0, z: 500, }, { x: 0, y: 0, z: 0 }, 2000).linkWidth(.3);
         setTimeout(() => {
             Graph.enableNavigationControls(true)
         }, 2000);
     } else {
         cardDOM.style.opacity = 1;
+        cardDOM.style.pointerEvents = "all";
+        prevBtn.style.opacity = 0;
+        prevBtn.style.pointerEvents = "none";
+        nextBtn.style.opacity = 0;
+        nextBtn.style.pointerEvents = "none";
+        captionDOM.style.opacity = 0;
         let child = Array.from(cardDOM.children);
         for (let i = 0; i < child.length; i++) {
             if (child[i].id !== "cardClose") {

@@ -433,6 +433,7 @@ h1 {
   justify-content: space-evenly;
   padding: 20px 30px;
   opacity: 0;
+  pointer-events: none;
   color: $darkblue;
   font-family: "Futura", cursive;
 
@@ -465,7 +466,6 @@ h1 {
     position: absolute;
     top: 5%;
     left: 5%;
-    pointer-events: all;
     background-color: transparent;
     border: none;
     color: $blue;
@@ -476,6 +476,11 @@ h1 {
 
     &:hover {
       cursor: pointer;
+    }
+
+    img {
+      width: 20px;
+      height: 23px;
     }
   }
 }
