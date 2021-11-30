@@ -24,6 +24,10 @@ const favicon = require("./assets/favicon.png");
 document.getElementById("favicon").href = favicon;
 const cardCloseImg = require("./assets/close.png");
 document.getElementById("cardCloseImg").src = cardCloseImg;
+const gobelins = require("./assets/gobelins.png");
+document.getElementById("gobelinsLogo").src = gobelins;
+const home = require("./assets/home.png");
+document.getElementById("homeLogo").src = home;
 const people = require("./assets/people.png");
 Array.from(document.getElementsByClassName("people")).forEach(element => {
     element.src = people
@@ -81,6 +85,8 @@ Graph.controls().noPan = true
 document.getElementById("start").addEventListener("click", _ => { start() });
 
 const start = () => {
+    prevBtn.style.pointerEvents = "none";
+    prevBtn.style.opacity = 0;
     document.getElementById("start").style.pointerEvents = "none"
     Graph.controls().noRotate = true
     gsap.to(Graph.camera().position, { x: 0, y: 0, z: 500, duration: 5, onComplete: _ => { Graph.controls().noRotate = false }});
@@ -149,6 +155,39 @@ const start = () => {
     if (!isPlaying) playAmbient()
 }
 
+document.getElementById("backHome").addEventListener("click", _ => { restart() })
+
+const restart = () => {
+    gsap.to(frames[5].children, { translateY: -50, opacity: 0, duration: 1.5, stagger: .2, ease: 'Power2.InOut', onComplete: _ => {
+        frames[5].style.pointerEvents = "none"
+        document.getElementsByClassName("home")[0].style.opacity = 1;
+        gsap.to(homeAnim, { translateY: 0, opacity: 1, duration: 1.5, stagger: .2, ease: 'Power2.InOut' })
+        gsap.to(document.getElementsByClassName("content")[0].style, { opacity: 0, duration: 1.5 })
+        document.getElementsByClassName("content")[0].style.pointerEvents = "none";
+        document.getElementsByClassName("home")[0].style.pointerEvents = "all";
+        document.getElementById("start").style.pointerEvents = "all"
+        Graph.cameraPosition({ x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 0 }, 2000)
+        Graph.nodeOpacity(0).linkOpacity(0)
+        Graph.graphData().nodes.forEach(node => { delete node.color; });
+        let newNodes = []
+        let newLinks = []
+        for (let i = 0; i < data.nodes.length; i++) {
+            newNodes.push(data.nodes[i])
+        }
+        for (let i = 0; i < data.links.length; i++) {
+            newLinks.push(data.links[i])
+        }
+        Graph.graphData({ nodes: [...newNodes], links: [...newLinks] }).nodeColor(node => captions.group2020[node.group2020 - 1]);
+        Graph.enableNavigationControls(true)
+        gsap.to(frames[5].children, { translateY: 0 })
+    }})
+    STEP = 0
+    DOT = 0
+    setTimeout(() => {
+        timeline(0)
+    }, 3000);
+}
+
 const title = document.getElementsByTagName("h1")[0]
 
 const timeline = (number) => {
@@ -211,7 +250,7 @@ const progress = (direction) => {
         prevBtn.style.opacity = 1;
     }
 
-    if (STEP === 19) {
+    if (STEP === 20) {
         nextBtn.style.pointerEvents = "none";
         nextBtn.style.opacity = 0;
     } else {
@@ -289,7 +328,6 @@ const progress = (direction) => {
         Graph.cameraPosition({ x: 0, y: 0, z: 500 }, { x: 1000, y: 0, z: 0 }, 2000)
         frames.forEach(frame => { frame.style.opacity = 0 })
         frames[0].style.opacity = 1
-        Graph.enableNavigationControls(false)
         let counter = document.getElementById("counter1")
         gsap.from(counter, { innerHTML: Math.floor(0), duration: 2, onUpdate: _ => {
             counter.innerHTML = Math.floor(parseInt(counter.innerHTML))
@@ -298,7 +336,6 @@ const progress = (direction) => {
     } else if (STEP === 16) {
         frames.forEach(frame => { frame.style.opacity = 0 })
         frames[1].style.opacity = 1
-        Graph.enableNavigationControls(false)
         let counter = document.getElementById("counter2")
         gsap.from(counter, { innerHTML: Math.floor(0), duration: 2, onUpdate: _ => {
             counter.innerHTML = Math.floor(parseInt(counter.innerHTML))
@@ -307,7 +344,6 @@ const progress = (direction) => {
     } else if (STEP === 17) {
         frames.forEach(frame => { frame.style.opacity = 0 })
         frames[2].style.opacity = 1
-        Graph.enableNavigationControls(false)
         setProgress(document.querySelector('#circle1'), 38);
         setProgress(document.querySelector('#circle2'), 58);
         setProgress(document.querySelector('#circle3'), 4);
@@ -317,12 +353,10 @@ const progress = (direction) => {
         frames[3].style.opacity = 1
         let frame4anim = document.getElementById("frame4params").children
         gsap.from(frame4anim, { translateY: -50, opacity: 0, duration: 1.5, stagger: { from: 'end', each: .1 }, ease: 'Power2.InOut' })
-        Graph.enableNavigationControls(false)
         timeline(16)
     } else if (STEP === 19) {
         frames.forEach(frame => { frame.style.opacity = 0 })
         frames[4].style.opacity = 1
-        Graph.enableNavigationControls(false)
         let bars = Array.from(document.getElementsByClassName("bar"))
         let barsOffset = [{h: 172}, {h: 228}, {h: 164}, {h: 236}]
         for (let i = 0; i < bars.length; i++) {
@@ -337,6 +371,12 @@ const progress = (direction) => {
             }})
         }
         timeline(17)
+    } else if (STEP === 20) {
+        frames.forEach(frame => { frame.style.opacity = 0 })
+        frames[5].style.opacity = 1
+        frames[5].style.pointerEvents = "all"
+        gsap.fromTo(frames[5].children, { translateY: -50, opacity: 0 }, { translateY: 0, opacity: 1, duration: 1.5, stagger: { from: 'end', each: 0.2 }, ease: 'Power2.InOut' })
+        sub(-1)
     }
 }
 
@@ -345,7 +385,8 @@ const frames = [
     document.getElementsByClassName("frame-2")[0],
     document.getElementsByClassName("frame-3")[0],
     document.getElementsByClassName("frame-4")[0],
-    document.getElementsByClassName("frame-5")[0]
+    document.getElementsByClassName("frame-5")[0],
+    document.getElementsByClassName("frame-6")[0]
 ]
 
 const captions = {
@@ -610,7 +651,7 @@ const sub = (number) => {
     Object.keys(subHowls).forEach(function(key) {
         subHowls[key].stop();
     });
-    if (number < 20) {
+    if (number < 20 && number >= 0) {
         isPlaying && subHowls[number].play()
         if (number === 8) {
             subtitleDOM.innerHTML = subtitles[number]
@@ -625,5 +666,7 @@ const sub = (number) => {
             isPlaying && subHowls[number].play()
             subtitleDOM.innerHTML = subtitles[number]
         }
+    } else if (number === -1) {
+        subtitleDOM.innerHTML = ""
     }
 }
