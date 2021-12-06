@@ -461,8 +461,10 @@ const card = (node) => {
     if (node === "none") {
         cardDOM.style.opacity = 0;
         cardDOM.style.pointerEvents = "none";
-        prevBtn.style.opacity = 1;
-        prevBtn.style.pointerEvents = "all";
+        if (STEP !== 0) {
+            prevBtn.style.opacity = 1;
+            prevBtn.style.pointerEvents = "all";
+        }
         nextBtn.style.opacity = 1;
         nextBtn.style.pointerEvents = "all";
         captionsOrder[STEP] === "none" ? captionDOM.style.opacity = 0 : captionDOM.style.opacity = 1;
