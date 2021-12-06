@@ -805,3 +805,32 @@ h1 {
   max-width: 100%;
   max-height: 100%;
 }
+
+.mobile {
+  width: 60%;
+  height: 50%;
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+
+  h2 {
+    color: $white;
+    text-align: center;
+    font-family: "Futura", cursive;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .mobile {
+    display: flex;
+  }
+
+  .home, .content, .bilan {
+    display: none;
+  }
+}
