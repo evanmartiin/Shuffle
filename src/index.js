@@ -85,6 +85,7 @@ Graph.controls().noPan = true
 document.getElementById("start").addEventListener("click", _ => { start() });
 
 const start = () => {
+    buttonHowl.play()
     prevBtn.style.pointerEvents = "none";
     prevBtn.style.opacity = 0;
     document.getElementById("start").style.pointerEvents = "none"
@@ -155,7 +156,10 @@ const start = () => {
     if (!isPlaying) playAmbient()
 }
 
-document.getElementById("backHome").addEventListener("click", _ => { restart() })
+document.getElementById("backHome").addEventListener("click", _ => {
+    buttonHowl.play()
+    restart()
+})
 
 const restart = () => {
     gsap.to(frames[5].children, { translateY: -50, opacity: 0, duration: 1.5, stagger: .2, ease: 'Power2.InOut', onComplete: _ => {
@@ -459,6 +463,7 @@ let cardImgs = [
 const card = (node) => {
     let cardDOM = document.getElementsByClassName("card")[0]
     if (node === "none") {
+        zoomHowl.play()
         cardDOM.style.opacity = 0;
         cardDOM.style.pointerEvents = "none";
         if (STEP !== 0) {
@@ -473,6 +478,7 @@ const card = (node) => {
             Graph.enableNavigationControls(true)
         }, 2000);
     } else {
+        zoomHowl.play()
         cardDOM.style.opacity = 1;
         cardDOM.style.pointerEvents = "all";
         prevBtn.style.opacity = 0;
@@ -672,3 +678,26 @@ const sub = (number) => {
         subtitleDOM.innerHTML = ""
     }
 }
+
+let buttonHowl = new Howl({
+    src: require("./assets/sounds/button2.wav"),
+    volume: .5
+})
+
+let zoomHowl = new Howl({
+    src: require("./assets/sounds/button3.wav"),
+    volume: .5
+})
+
+let randomHowl = new Howl({
+    src: require("./assets/sounds/ambient-random.wav"),
+    volume: .1
+})
+
+randomHowl.once('load', function(){
+    setInterval(() => {
+        if (isPlaying) {
+            randomHowl.play()
+        }
+    }, 15000);
+  });

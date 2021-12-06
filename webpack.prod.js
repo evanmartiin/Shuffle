@@ -61,7 +61,7 @@ module.exports = {
             },
             {
                 // Load all icons
-                test: /\.(eot|woff|woff2|svg|ttf|jpg|png|jpeg|glb|gltf|mp3)([\?]?.*)$/,
+                test: /\.(eot|woff|woff2|svg|ttf|jpg|png|jpeg|glb|gltf|mp3|wav)([\?]?.*)$/,
                 use: [
                     {
                         loader: 'file-loader',
