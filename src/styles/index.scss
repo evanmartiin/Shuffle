@@ -78,7 +78,9 @@ body {
 
   p:first-of-type {
     color: $white;
-    font-family: "Futura", cursive;
+    font-family: futura-pt, sans-serif;
+    font-weight: 600;
+    font-style: normal;
     font-size: 20px;
     text-align: center;
     width: 700px;
@@ -86,8 +88,9 @@ body {
 
   p:last-of-type {
     color: $blue;
-    font-family: "Futura", cursive;
-    font-weight: bold;
+    font-family: futura-pt-bold, sans-serif;
+    font-weight: 700;
+    font-style: normal;
     font-size: 22px;
     text-align: center;
     width: 700px;
@@ -196,7 +199,9 @@ h1 {
   transform: translateX(-50%);
   bottom: 100px;
   color: $white;
-  font-family: "Futura", cursive;
+  font-family: futura-pt, sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .timeline-container {
@@ -307,7 +312,9 @@ h1 {
 
 .tl-text {
   color: $white;
-  font-family: "Futura";
+  font-family: futura-pt, sans-serif;
+  font-weight: 600;
+  font-style: normal;
   transition: .5s;
   margin: 0;
 }
@@ -358,7 +365,9 @@ h1 {
     margin: 0;
     margin-left: 20px;
     color: $white;
-    font-family: "Futura", cursive;
+    font-family: futura-pt, sans-serif;
+    font-weight: 600;
+    font-style: normal;
   }
 }
 
@@ -419,7 +428,9 @@ h1 {
   opacity: 0;
   pointer-events: none;
   color: $darkblue;
-  font-family: "Futura", cursive;
+  font-family: futura-pt, sans-serif;
+  font-weight: 600;
+  font-style: normal;
 
   div:first-of-type {
     display: flex;
@@ -453,8 +464,9 @@ h1 {
     background-color: transparent;
     border: none;
     color: $blue;
-    font-family: "Futura", cursive;
-    font-weight: bold;
+    font-family: futura-pt-bold, sans-serif;
+    font-weight: 700;
+    font-style: normal;
     font-size: 15px;
     transform: scaleX(1.2);
 
@@ -476,9 +488,10 @@ h1 {
   transform: translateX(-50%);
   width: 80%;
   height: 60%;
-  font-family: "Futura", cursive;
+  font-family: futura-pt, sans-serif;
+  font-weight: 600;
+  font-style: normal;
   color: $white;
-  font-weight: normal;
   pointer-events: none;
 
   h2 {
@@ -820,7 +833,9 @@ h1 {
   h2 {
     color: $white;
     text-align: center;
-    font-family: "Futura", cursive;
+    font-family: futura-pt, sans-serif;
+    font-weight: 600;
+    font-style: normal;
     font-size: 20px;
   }
 }
